@@ -8,7 +8,7 @@
         <datasource-mapping>
           <factory-entry name="NewPersistenceUnit" value="ac194774-e1f6-424a-a515-4e218de26db6" />
         </datasource-mapping>
-        <deploymentDescriptor name="persistence.xml" url="file://$MODULE_DIR$/src/main/resources/META-INF/persistence.xml" />
+        <deploymentDescriptor name="persistence.xml" url="file://$MODULE_DIR$/src/test/resources/META-INF/persistencetest.xml" />
       </configuration>
     </facet>
     <facet type="Spring" name="Spring">

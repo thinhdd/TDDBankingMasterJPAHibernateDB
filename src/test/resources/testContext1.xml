@@ -13,7 +13,7 @@
 
     <bean id="placeholderConfig"
           class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-        <property name="location" value="classpath:dbTest.properties"/>
+        <property name="location" value="classpath:db.properties"/>
     </bean>
 
     <bean id="bankAccountDAO" class="com.qsoft.banking.persistence.dao.impl.BankAccountDAOImpl"/>

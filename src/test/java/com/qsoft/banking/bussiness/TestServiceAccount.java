@@ -2,7 +2,7 @@ package com.qsoft.banking.bussiness;
 
 import com.qsoft.banking.bussiness.impl.BankAccountImpl;
 import com.qsoft.banking.persistence.dao.impl.BankAccountDAOImpl;
-import com.qsoft.banking.persistence.model.impl.BankAccountDTOImpl;
+import com.qsoft.banking.persistence.model.impl.BankAccountDTO;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
@@ -30,29 +30,29 @@ public class TestServiceAccount {
     {
         reset(mockDao);
         reset(calendar);
-        BankAccountDTOImpl.setCalendar(calendar);
+        BankAccountDTO.setCalendar(calendar);
         bankAccount.setBankAccountDAO(mockDao);
     }
     @Test
     public void testOpenAccount()
     {
-        ArgumentCaptor<BankAccountDTOImpl> ac = ArgumentCaptor.forClass(BankAccountDTOImpl.class);
-        BankAccountDTOImpl bankAccount1 = bankAccount.openAccount(accountNumber);
+        ArgumentCaptor<BankAccountDTO> ac = ArgumentCaptor.forClass(BankAccountDTO.class);
+        BankAccountDTO bankAccount1 = bankAccount.openAccount(accountNumber);
         verify(mockDao).save(ac.capture());
         assertEquals(accountNumber, ac.getValue().getAccountNumber());
         assertEquals(0.0, ac.getValue().getBalance());
     }
     @Test
     public void testGetAccount() throws SQLException {
-        BankAccountDTOImpl account = new BankAccountDTOImpl(accountNumber);
+        BankAccountDTO account = new BankAccountDTO(accountNumber);
         when(mockDao.getAccount(accountNumber)).thenReturn(account);
-        BankAccountDTOImpl accountResult = bankAccount.getAccount(accountNumber);
+        BankAccountDTO accountResult = bankAccount.getAccount(accountNumber);
         assertEquals(account, accountResult);
     }
     @Test
     public void testCheckTimeStamp()
     {
-        ArgumentCaptor<BankAccountDTOImpl> ac = ArgumentCaptor.forClass(BankAccountDTOImpl.class);
+        ArgumentCaptor<BankAccountDTO> ac = ArgumentCaptor.forClass(BankAccountDTO.class);
         when(calendar.getTimeInMillis()).thenReturn(1000l);
         bankAccount.openAccount(accountNumber);
         verify(mockDao).save(ac.capture());

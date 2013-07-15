@@ -3,7 +3,7 @@
 
     <persistence-unit name="NewPersistenceUnit">
         <provider>org.hibernate.ejb.HibernatePersistence</provider>
-        <class>com.qsoft.banking.persistence.model.impl.BankAccountDTOImpl</class>
+        <class>com.qsoft.banking.persistence.model.impl.BankAccountDTO</class>
         <properties>
             <property name="hibernate.dialect" value="org.hibernate.dialect.PostgresPlusDialect"/>
             <property name="hibernate.archive.autodetection" value="class"/>

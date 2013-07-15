@@ -1,7 +1,7 @@
 package com.qsoft.banking.persistence.dao.impl;
 
 import com.qsoft.banking.persistence.dao.BankAccountDAO;
-import com.qsoft.banking.persistence.model.impl.BankAccountDTOImpl;
+import com.qsoft.banking.persistence.model.impl.BankAccountDTO;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,16 +25,18 @@ public class BankAccountDAOImpl implements BankAccountDAO{
     public BankAccountDAOImpl() {
     }
 
-    public void save(BankAccountDTOImpl account) {
-        entityManager.persist(account);
+    public void save(BankAccountDTO account) {
+    entityManager.persist(account);
+    entityManager.flush();
+
         //To change body of created methods use File | Settings | File Templates.
     }
 
-    public BankAccountDTOImpl getAccount(String accountNumber) {
+    public BankAccountDTO getAccount(String accountNumber) {
 
-        Query query = entityManager.createQuery("select o from BankAccountDTOImpl o where o.accountNumber = :qAccountNumber", BankAccountDTOImpl.class);
+        Query query = entityManager.createQuery("select o from BankAccountDTO o where o.accountNumber = :qAccountNumber", BankAccountDTO.class);
         query.setParameter("qAccountNumber", accountNumber);
-        List<BankAccountDTOImpl> list = query.getResultList();
+        List<BankAccountDTO> list = query.getResultList();
         if (list.size() == 0)
         {
             return null;

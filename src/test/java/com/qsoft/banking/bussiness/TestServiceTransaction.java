@@ -4,8 +4,8 @@ import com.qsoft.banking.bussiness.impl.BankAccountImpl;
 import com.qsoft.banking.bussiness.impl.TransactionImpl;
 import com.qsoft.banking.persistence.dao.impl.BankAccountDAOImpl;
 import com.qsoft.banking.persistence.dao.impl.TransactionDAOImpl;
-import com.qsoft.banking.persistence.model.impl.BankAccountDTOImpl;
-import com.qsoft.banking.persistence.model.impl.TransactionDTOImpl;
+import com.qsoft.banking.persistence.model.impl.BankAccountDTO;
+import com.qsoft.banking.persistence.model.impl.TransactionDTO;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
@@ -39,24 +39,24 @@ public class TestServiceTransaction {
         reset(calendar);
         bankAccountImpl.setBankAccountDAO(mockDao);
         transactionImpl.setTransactionDAO(mockTDao);
-        TransactionDTOImpl.setCalendar(calendar);
+        TransactionDTO.setCalendar(calendar);
     }
     @Test
     public void testDeposit() throws SQLException {
-        ArgumentCaptor<BankAccountDTOImpl> ac = ArgumentCaptor.forClass(BankAccountDTOImpl.class);
-        BankAccountDTOImpl account = bankAccountImpl.openAccount(accountNumber);
+        ArgumentCaptor<BankAccountDTO> ac = ArgumentCaptor.forClass(BankAccountDTO.class);
+        BankAccountDTO account = bankAccountImpl.openAccount(accountNumber);
 
         when(mockDao.getAccount(accountNumber)).thenReturn(account);
         bankAccountImpl.doDeposit(accountNumber, 100.0, "Them 100k");
         verify(mockDao ,times(2)).save(ac.capture());
-        List<BankAccountDTOImpl> list = ac.getAllValues();
+        List<BankAccountDTO> list = ac.getAllValues();
         assertEquals(accountNumber, list.get(1).getAccountNumber());
         assertEquals(100.0, list.get(1).getBalance());
     }
     @Test
     public void testSaveDeposit() throws SQLException {
-        ArgumentCaptor<TransactionDTOImpl> act = ArgumentCaptor.forClass(TransactionDTOImpl.class);
-        BankAccountDTOImpl account = bankAccountImpl.openAccount(accountNumber);
+        ArgumentCaptor<TransactionDTO> act = ArgumentCaptor.forClass(TransactionDTO.class);
+        BankAccountDTO account = bankAccountImpl.openAccount(accountNumber);
         when(mockDao.getAccount(accountNumber)).thenReturn(account);
         when(calendar.getTimeInMillis()).thenReturn(1000l);
         bankAccountImpl.doDeposit(accountNumber, 100.0, "Them 100k");
@@ -68,20 +68,20 @@ public class TestServiceTransaction {
     }
     @Test
     public void testWithDraw() throws SQLException {
-        ArgumentCaptor<BankAccountDTOImpl> ac = ArgumentCaptor.forClass(BankAccountDTOImpl.class);
-        BankAccountDTOImpl account = bankAccountImpl.openAccount(accountNumber);
+        ArgumentCaptor<BankAccountDTO> ac = ArgumentCaptor.forClass(BankAccountDTO.class);
+        BankAccountDTO account = bankAccountImpl.openAccount(accountNumber);
         when(mockDao.getAccount(accountNumber)).thenReturn(account);
         bankAccountImpl.doDeposit(accountNumber, 100.0, "Them 100k");
         bankAccountImpl.doWithDraw(accountNumber, 50.0, "Rut 50k");
         verify(mockDao ,times(3)).save(ac.capture());
-        List<BankAccountDTOImpl> list = ac.getAllValues();
+        List<BankAccountDTO> list = ac.getAllValues();
         assertEquals(accountNumber, list.get(2).getAccountNumber());
         assertEquals(50.0, list.get(2).getBalance());
     }
     @Test
     public void testWithDrawSave() throws SQLException {
-        ArgumentCaptor<TransactionDTOImpl> act = ArgumentCaptor.forClass(TransactionDTOImpl.class);
-        BankAccountDTOImpl account = bankAccountImpl.openAccount(accountNumber);
+        ArgumentCaptor<TransactionDTO> act = ArgumentCaptor.forClass(TransactionDTO.class);
+        BankAccountDTO account = bankAccountImpl.openAccount(accountNumber);
         when(mockDao.getAccount(accountNumber)).thenReturn(account);
         when(calendar.getTimeInMillis()).thenReturn(1000l);
         bankAccountImpl.doWithDraw(accountNumber, 50.0, "Rut 50k");

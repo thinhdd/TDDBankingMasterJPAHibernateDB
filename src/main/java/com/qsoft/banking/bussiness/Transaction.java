@@ -1,7 +1,7 @@
 package com.qsoft.banking.bussiness;
 
 import com.qsoft.banking.persistence.dao.impl.TransactionDAOImpl;
-import com.qsoft.banking.persistence.model.impl.TransactionDTOImpl;
+import com.qsoft.banking.persistence.model.impl.TransactionDTO;
 
 import java.util.List;
 
@@ -17,9 +17,9 @@ public interface Transaction {
 
     public void createTransaction(String accountNumber, double amount, String des, boolean state);
 
-    public List<TransactionDTOImpl> getAllTransaction(String accountNumber);
+    public List<TransactionDTO> getAllTransaction(String accountNumber);
 
-    public List<TransactionDTOImpl> getAllTransaction(String accountNumber, long start, long end);
+    public List<TransactionDTO> getAllTransaction(String accountNumber, long start, long end);
 
-    public List<TransactionDTOImpl> getAllTransaction(String accountNumber, int count);
+    public List<TransactionDTO> getAllTransaction(String accountNumber, int count);
 }

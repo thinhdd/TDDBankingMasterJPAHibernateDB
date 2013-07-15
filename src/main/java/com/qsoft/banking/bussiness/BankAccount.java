@@ -1,8 +1,8 @@
 package com.qsoft.banking.bussiness;
 
 import com.qsoft.banking.persistence.dao.impl.BankAccountDAOImpl;
-import com.qsoft.banking.persistence.model.impl.BankAccountDTOImpl;
-import com.qsoft.banking.persistence.model.impl.TransactionDTOImpl;
+import com.qsoft.banking.persistence.model.impl.BankAccountDTO;
+import com.qsoft.banking.persistence.model.impl.TransactionDTO;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -17,17 +17,17 @@ import java.util.List;
 public interface BankAccount {
     public void setBankAccountDAO(BankAccountDAOImpl mockDao);
 
-    public BankAccountDTOImpl openAccount(String accountNumber);
+    public BankAccountDTO openAccount(String accountNumber);
 
-    public BankAccountDTOImpl getAccount(String accountNumber) throws SQLException;
+    public BankAccountDTO getAccount(String accountNumber) throws SQLException;
 
     public void doDeposit(String accountNumber, double amount, String des) throws SQLException;
 
     public void doWithDraw(String accountNumber, double amount, String des) throws SQLException;
 
-    public List<TransactionDTOImpl> getAllTransaction(String accountNumber);
+    public List<TransactionDTO> getAllTransaction(String accountNumber);
 
-    public List<TransactionDTOImpl> getAllTransaction(String accountNumber, long start, long end);
+    public List<TransactionDTO> getAllTransaction(String accountNumber, long start, long end);
 
-    public List<TransactionDTOImpl> getAllTransaction(String accountNumber, int count);
+    public List<TransactionDTO> getAllTransaction(String accountNumber, int count);
 }

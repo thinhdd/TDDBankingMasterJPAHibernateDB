@@ -1,5 +1,6 @@
 package com.qsoft.banking.persistence.model.impl;
 
+import javax.persistence.*;
 import java.util.Calendar;
 
 /**
@@ -9,17 +10,27 @@ import java.util.Calendar;
  * Time: 10:14 PM
  * To change this template use File | Settings | File Templates.
  */
+@Entity
+@Table(name ="transaction")
+@SequenceGenerator(name = "seq_id1", sequenceName = "seq_id1", initialValue = 1, allocationSize = 1)
+public class TransactionDTO {
 
-public class TransactionDTOImpl {
-
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "seq_id1")
+    @Id
+    @Column(name = "id")
     private String id;
+    @Column(name = "account_number")
     private String accountNumber;
-    private double amount;
-    private String des;
+    @Column(name = "open_time_stamp")
     long timeStamp;
+    @Column(name = "amount")
+    private double amount;
+    @Column(name = "description")
+    private String des;
+    @Column(name = "state")
     private boolean state;
     static Calendar calendar =Calendar.getInstance();
-    public TransactionDTOImpl(String accountNumber, double amount, String des, boolean state) {
+    public TransactionDTO(String accountNumber, double amount, String des, boolean state) {
         this.accountNumber=accountNumber;
         this.amount=amount;
         this.des=des;
@@ -27,8 +38,16 @@ public class TransactionDTOImpl {
         this.state=state;
         //To change body of created methods use File | Settings | File Templates.
     }
+    public TransactionDTO(String accountNumber, double amount, String des, boolean state, long timeStamp) {
+        this.accountNumber=accountNumber;
+        this.amount=amount;
+        this.des=des;
+        this.timeStamp=timeStamp;
+        this.state=state;
+        //To change body of created methods use File | Settings | File Templates.
+    }
 
-    public TransactionDTOImpl() {
+    public TransactionDTO() {
     }
 
     public String getAccountNumber() {
@@ -49,5 +68,13 @@ public class TransactionDTOImpl {
 
     public static void setCalendar(Calendar calendars) {
         calendar = calendars;
+    }
+
+    public boolean getState() {
+        return state;
+    }
+
+    public void setState(boolean state) {
+        this.state = state;
     }
 }

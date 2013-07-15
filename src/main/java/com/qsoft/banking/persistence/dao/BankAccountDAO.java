@@ -1,6 +1,6 @@
 package com.qsoft.banking.persistence.dao;
 
-import com.qsoft.banking.persistence.model.impl.BankAccountDTOImpl;
+import com.qsoft.banking.persistence.model.impl.BankAccountDTO;
 
 /**
  * Created with IntelliJ IDEA.
@@ -11,7 +11,7 @@ import com.qsoft.banking.persistence.model.impl.BankAccountDTOImpl;
  */
 public interface BankAccountDAO {
 
-    public void save(BankAccountDTOImpl account) ;
+    public void save(BankAccountDTO account) ;
 
-    public BankAccountDTOImpl getAccount(String accountNumber);
+    public BankAccountDTO getAccount(String accountNumber);
 }

@@ -13,8 +13,8 @@ import java.util.Calendar;
 @Entity
 @Table(name ="bank_account")
 @SequenceGenerator(name = "seq_id1", sequenceName = "seq_id1", initialValue = 1, allocationSize = 1)
-public class BankAccountDTOImpl {
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_id1")
+public class BankAccountDTO {
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "seq_id1")
     @Id
     @Column(name = "id")
     private int id;
@@ -25,16 +25,16 @@ public class BankAccountDTOImpl {
     @Column(name = "open_time_stamp")
     private long timeStamp;
     static Calendar calendar = Calendar.getInstance();
-    public BankAccountDTOImpl(String accountNumber) {
+    public BankAccountDTO(String accountNumber) {
         this.accountNumber=accountNumber;
         timeStamp=calendar.getTimeInMillis();
         //To change body of created methods use File | Settings | File Templates.
     }
 
-    public BankAccountDTOImpl() {
+    public BankAccountDTO() {
     }
 
-    public BankAccountDTOImpl(String accountNumber, double balance, long timeStamp) {
+    public BankAccountDTO(String accountNumber, double balance, long timeStamp) {
         this.accountNumber=accountNumber;
         this.balance=balance;
         this.timeStamp=timeStamp;
